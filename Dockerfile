@@ -1,19 +1,15 @@
-FROM python:3.13.0a4-alpine3.19
-# Set the working directory in the container
-WORKDIR /usr/src/app
+FROM python:3-alpine3.19
 
+# Set the working directory in the container
+WORKDIR /app
+COPY requirements.txt .
 # Copy the current directory contents into the container at /usr/src/app
-COPY . .
+COPY src src
 
 # Install any needed dependencies specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
 
-# Make port 5000 available to the world outside this container
-EXPOSE 5000
-
-# Define environment variable
-ENV FLASK_APP=src/app.py
-
-# Run app.py when the container launches
-CMD ["flask", "run", "--host=0.0.0.0"]
+ENTRYPOINT [ "python","./src/app.py" ]
+# Make port 9090 available to the world outside this container
+EXPOSE 9090
 
