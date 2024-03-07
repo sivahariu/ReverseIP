@@ -1,0 +1,15 @@
+# Value Yaml File
+
+fullnameOverride: "flaskapp"
+
+replicaCount: 1
+image:
+  repository: sivahariu/flask5
+  tag: latest
+  pullPolicy: IfNotPresent
+service:
+  name: flaskappservice
+  type: NodePort
+  port: 9191
+  targetPort: 9090
+  nodePort: 30100
